@@ -8,7 +8,7 @@ const unsigned int height = 800;
 unsigned int samples = 8;
 
 // Controls the gamma function
-float gamma = 2.2f;
+float correction_gamma = 2.2f;
 
 
 float rectVertices[] =
@@ -111,7 +111,7 @@ int main()
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 	framebufferProgram.Activate();
 	glUniform1i(glGetUniformLocation(framebufferProgram.ID, "screenTexture"), 0);
-	glUniform1f(glGetUniformLocation(framebufferProgram.ID, "gamma"), gamma);
+	glUniform1f(glGetUniformLocation(framebufferProgram.ID, "gamma"), correction_gamma);
 
 
 
@@ -235,7 +235,7 @@ int main()
 		// Bind the custom framebuffer
 		glBindFramebuffer(GL_FRAMEBUFFER, FBO);
 		// Specify the color of the background
-		glClearColor(pow(0.07f, gamma), pow(0.13f, gamma), pow(0.17f, gamma), 1.0f);
+		glClearColor(pow(0.07f, correction_gamma), pow(0.13f, correction_gamma), pow(0.17f, correction_gamma), 1.0f);
 		// Clean the back buffer and depth buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
