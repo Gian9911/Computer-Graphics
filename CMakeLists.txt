@@ -20,18 +20,12 @@ foreach(file ${SHADERS})
               ${file} ${PROJECT_BINARY_DIR}
   )
 endforeach()
-add_custom_target(ModelFiles ALL
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/models
-    ${PROJECT_SOURCE_DIR}/models
-    ${PROJECT_BINARY_DIR}/models
-    COMMENT "Copying model"
-)
 add_custom_target(Textures ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/textures
     ${PROJECT_SOURCE_DIR}/textures
     ${PROJECT_BINARY_DIR}/textures
     COMMENT "Copying texture"
 )
-add_dependencies(OPGL ModelFiles Textures)
+add_dependencies(OPGL Textures)
 target_link_libraries(OPGL PRIVATE -lglfw3 -lglew32s -lopengl32 -lgdi32)
 target_include_directories(OPGL PRIVATE ${H_DIR})
