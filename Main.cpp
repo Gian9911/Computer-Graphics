@@ -23,7 +23,7 @@ float rectVertices[] =
 	-1.0f,  1.0f,  0.0f, 1.0f
 };
 
-// Vertices for plane with texture
+
 std::vector<Vertex> vertices =
 {
 
@@ -64,7 +64,7 @@ std::vector<Vertex> vertices =
 		Vertex{glm::vec3(1.0f, -1.0f, -1.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec2(0.0f, 1.0f)},
 
 };
-// Indices for plane with texture
+
 std::vector<GLuint> indices =
 {
 	0, 1, 2,
@@ -88,8 +88,8 @@ int main()
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	// Tell GLFW we are using the CORE profile
-	// only  modern functions
+	
+	// only  modern 
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	GLFWwindow* window = glfwCreateWindow(width, height, "OPGL", NULL, NULL);
@@ -195,8 +195,8 @@ int main()
 
 	
 
-	std::string diffusePath = "textures/diffuse.png";
-	std::string normalPath = "textures/normal.png";
+	std::string diffusePath = "textures/stone_wall_diffuse.jpeg";
+	std::string normalPath = "textures/stone_wall_normal.png";
 
 	std::vector<Texture> textures =
 	{
