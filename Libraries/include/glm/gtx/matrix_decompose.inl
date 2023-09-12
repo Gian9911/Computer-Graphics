@@ -26,7 +26,7 @@ namespace detail
 
 	// Matrix decompose
 	// http://www.opensource.apple.com/source/WebCore/WebCore-514/platform/graphics/transforms/TransformationMatrix.cpp
-	// Decomposes the mode matrix to translations,rotation scale components
+	// Decomposes the mode matrix to translations,angleOfRotation scale components
 
 	template<typename T, qualifier Q>
 	GLM_FUNC_QUALIFIER bool decompose(mat<4, 4, T, Q> const& ModelMatrix, vec<3, T, Q> & Scale, qua<T, Q> & Orientation, vec<3, T, Q> & Translation, vec<3, T, Q> & Skew, vec<4, T, Q> & Perspective)

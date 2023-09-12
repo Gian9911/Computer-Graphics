@@ -134,7 +134,7 @@ namespace glm
 	GLM_FUNC_DECL qua<T, Q> toQuat(
 		mat<4, 4, T, Q> const& x){return quat_cast(x);}
 
-	/// Quaternion interpolation using the rotation short path.
+	/// Quaternion interpolation using the angleOfRotation short path.
 	///
 	/// @see gtx_quaternion
 	template<typename T, qualifier Q>
@@ -152,13 +152,13 @@ namespace glm
 		qua<T, Q> const& y,
 		T const& a);
 
-	/// Compute the rotation between two vectors.
+	/// Compute the angleOfRotation between two vectors.
 	/// @param orig vector, needs to be normalized
 	/// @param dest vector, needs to be normalized
 	///
 	/// @see gtx_quaternion
 	template<typename T, qualifier Q>
-	GLM_FUNC_DECL qua<T, Q> rotation(
+	GLM_FUNC_DECL qua<T, Q> angleOfRotation(
 		vec<3, T, Q> const& orig,
 		vec<3, T, Q> const& dest);
 

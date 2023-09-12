@@ -39,7 +39,7 @@ namespace glm
 		mat<3, 3, T, Q> const& m,
 		vec<2, T, Q> const& v);
 
-	/// Builds a rotation 3 * 3 matrix created from an angle.
+	/// Builds a angleOfRotation 3 * 3 matrix created from an angle.
 	///
 	/// @param m Input matrix multiplied by this translation matrix.
 	/// @param angle Rotation angle expressed in radians.

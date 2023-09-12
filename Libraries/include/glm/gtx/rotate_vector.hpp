@@ -110,7 +110,7 @@ namespace glm
 		vec<4, T, Q> const& v,
 		T const& angle);
 
-	//! Build a rotation matrix from a normal and a up vector.
+	//! Build a angleOfRotation matrix from a normal and a up vector.
 	//! From GLM_GTX_rotate_vector extension.
 	template<typename T, qualifier Q>
 	GLM_FUNC_DECL mat<4, 4, T, Q> orientation(

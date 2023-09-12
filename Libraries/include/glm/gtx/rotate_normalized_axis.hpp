@@ -32,9 +32,9 @@ namespace glm
 	/// @addtogroup gtx_rotate_normalized_axis
 	/// @{
 
-	/// Builds a rotation 4 * 4 matrix created from a normalized axis and an angle.
+	/// Builds a angleOfRotation 4 * 4 matrix created from a normalized axis and an angle.
 	///
-	/// @param m Input matrix multiplied by this rotation matrix.
+	/// @param m Input matrix multiplied by this angleOfRotation matrix.
 	/// @param angle Rotation angle expressed in radians.
 	/// @param axis Rotation axis, must be normalized.
 	/// @tparam T Value type used to build the matrix. Currently supported: half (not recommended), float or double.
@@ -53,7 +53,7 @@ namespace glm
 	///
 	/// @param q Source orientation
 	/// @param angle Angle expressed in radians.
-	/// @param axis Normalized axis of the rotation, must be normalized.
+	/// @param axis Normalized axis of the angleOfRotation, must be normalized.
 	///
 	/// @see gtx_rotate_normalized_axis
 	template<typename T, qualifier Q>

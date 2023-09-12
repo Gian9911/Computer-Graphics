@@ -174,7 +174,7 @@ namespace glm
 	template<typename T, qualifier Q>
 	GLM_FUNC_DECL tdualquat<T, Q> dualquat_cast(mat<2, 4, T, Q> const& x);
 
-	/// Converts a 3 * 4 matrix (augmented matrix rotation + translation) to a quaternion.
+	/// Converts a 3 * 4 matrix (augmented matrix angleOfRotation + translation) to a quaternion.
 	///
 	/// @see gtx_dual_quaternion
 	template<typename T, qualifier Q>

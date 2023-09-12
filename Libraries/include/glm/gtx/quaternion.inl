@@ -119,7 +119,7 @@ namespace glm
 	}
 
 	template<typename T, qualifier Q>
-	GLM_FUNC_QUALIFIER qua<T, Q> rotation(vec<3, T, Q> const& orig, vec<3, T, Q> const& dest)
+	GLM_FUNC_QUALIFIER qua<T, Q> angleOfRotation(vec<3, T, Q> const& orig, vec<3, T, Q> const& dest)
 	{
 		T cosTheta = dot(orig, dest);
 		vec<3, T, Q> rotationAxis;
@@ -132,9 +132,9 @@ namespace glm
 		if(cosTheta < static_cast<T>(-1) + epsilon<T>())
 		{
 			// special case when vectors in opposite directions :
-			// there is no "ideal" rotation axis
+			// there is no "ideal" angleOfRotation axis
 			// So guess one; any will do as long as it's perpendicular to start
-			// This implementation favors a rotation around the Up axis (Y),
+			// This implementation favors a angleOfRotation around the Up axis (Y),
 			// since it's often what you want to do.
 			rotationAxis = cross(vec<3, T, Q>(0, 0, 1), orig);
 			if(length2(rotationAxis) < epsilon<T>()) // bad luck, they were parallel, try again!
