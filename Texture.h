@@ -7,7 +7,7 @@
 #include"shaderClass.h"
 
 class Texture
-{
+{ 
 public:
 	GLuint ID;
 	const char* type;
