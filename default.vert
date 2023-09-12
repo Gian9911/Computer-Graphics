@@ -1,40 +1,43 @@
 #version 330 core
 
 layout (location = 0) in vec3 aPos;
-layout (location = 1) in vec3 aNormal;
-layout (location = 2) in vec3 aColor;
-layout (location = 3) in vec2 aTex;
+layout (location = 1) in vec2 aTex; 
+layout(location = 2) in vec3 aNormal;
+layout(location = 3) in vec3 aTangent;
+layout(location = 4) in vec3 aBitangent;
 
-
-out DATA
-{
-    vec3 Normal;
-	vec3 color;
-	vec2 texCoord;
-    mat4 projection;
-	mat4 model;
-	vec3 lightPos;
-	vec3 camPos;
-} data_out;
-
-
-
-uniform mat4 camMatrix;
-uniform mat4 model;
-uniform mat4 translation;
-uniform mat4 rotation;
-uniform mat4 scale;
+uniform mat4 rotation; 
+uniform mat4 camMatrix; // projection*view 
+uniform mat4 scalingMatrix;
+uniform mat4 translationMatrix;
 uniform vec3 lightPos;
 uniform vec3 camPos;
+uniform int lightType;
+
+out vec2 texCoord;
+// out vec3 Normal;
+out vec3 tangentPos;
+out vec3 Pos;
+out vec3 lightPosition;
+out vec3 cameraPos;
+
 
 void main()
-{
-	gl_Position = model * translation * rotation * scale * vec4(aPos, 1.0f);
-	data_out.Normal = aNormal;
-	data_out.color = aColor;
-	data_out.texCoord = aTex;
-	data_out.projection = camMatrix;
-	data_out.model = model * translation * rotation * scale;
-	data_out.lightPos = lightPos;
-	data_out.camPos = camPos;
-}
+{ 
+	Pos = vec3(translationMatrix * rotation * scalingMatrix * vec4(aPos, 1.0f));
+	gl_Position =   camMatrix  * translationMatrix * rotation * scalingMatrix * vec4(aPos, 1.0f); //contains the Position of the current vertex - aveva tangentPos
+	texCoord = aTex;
+	
+	mat3 my_model = transpose(inverse(mat3(translationMatrix * rotation * scalingMatrix)));
+	
+	vec3 T = normalize(vec3(my_model * aTangent));
+	vec3 N = normalize(vec3(my_model * aNormal));
+	T = normalize(T - dot(T, N) * N);
+	vec3 B = cross(N, T);
+
+	mat3 TBN = transpose(mat3(T,B,N));
+
+	lightPosition = TBN * lightPos;
+	cameraPos = TBN * camPos;
+	tangentPos =   TBN * Pos;
+	}
