@@ -1,13 +1,6 @@
-// #include <fstream>
-// #include <glm/glm.hpp>
-// #include <glm/gtc/matrix_transform.hpp>
-// #include <glm/gtc/type_ptr.hpp>
-// #include <stb/stb_image.h>
-
-#include "Mesh.h" // import glad
+#include "Mesh.h"
 #include <GLFW/glfw3.h>
 #include "imageProcessing.h"
-
 
 const unsigned int width = 1900;
 const unsigned int height = 1200;
@@ -101,7 +94,13 @@ void compute_TangentBitangent() {
     vertices[indices[i + 2]].normal = cross;
   }
 }
-
+/* 
+  You can choose 2 textures: 
+    diffuse.png -> diffuse image of a wall
+    h_map_noise.jpg -> height map generated using GIMP
+  Then you can compare the normal_map.png obtained with the original (normal.png for diffuse, h_map_noise_normal for the other)
+  checking the difference from generating a normal map with a diffuse and with height map. 
+*/
 int main() {
 
   glfwInit();
@@ -123,13 +122,11 @@ int main() {
   gladLoadGL();
   glViewport(0, 0, width, height);
   Shader shaderProgram("default.vert", "default.frag");
-  std::string diffusePath = "textures/diffuse.png";
+  std::string diffusePath = "textures/height_map_noise.jpg";
   ImageProcessing ip;
-  ip.compute_normal_map(diffusePath, 1);
+  ip.compute_normal_map(diffusePath, 2);
   std::string normalPath = "textures/normal_map.png";
-  std::string normalPath1 = "textures/normal.png";
   Shader lightShader("light.vert", "light.frag");
-
   glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 0.0f);
   glm::vec3 lightPos = glm::vec3(0.0f, 0.0f, 2.0f);
   glm::mat4 lightModel = glm::mat4(1.0f);
