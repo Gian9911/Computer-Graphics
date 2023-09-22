@@ -3,7 +3,6 @@
 out vec4 FragColor;
 
 in vec2 texCoord;
-// in vec3 Normal;
 in vec3 tangentPos;
 in vec3 Pos;
 in vec3 lightPosition;
@@ -27,7 +26,7 @@ vec4 pointLight()
 	float intens = 1.0f / (a * dist * dist + b * dist + 1.0f);
 
 	vec3 normal = texture(normal0, texCoord).rgb;
-	normal = normalize(normal * 2.0f - 1.0f); // [0,1]->[-1,1]
+	normal = normalize(normal * 2.0f - 1.0f); 
 	vec3 color = texture(diffuse0,texCoord).rgb;
 
 	// diffuse
@@ -54,7 +53,7 @@ vec4 directionalLight()
 	float ambient = 0.40f;
 	// diffuse lighting
 	vec3 normal = texture(normal0, texCoord).rgb;
-	normal = normalize(normal * 2.0f - 1.0f); // [0,1]->[-1,1]
+	normal = normalize(normal * 2.0f - 1.0f); 
 	vec3 lightDirection = normalize(lightPosition);
 	float diff = max(dot(normal, lightDirection), 0.0f);
 
@@ -78,7 +77,7 @@ vec4 spotLight()
 	float innerCone = 0.95f;
 
 	vec3 normal = texture(normal0, texCoord).rgb;
-	normal = normalize(normal * 2.0f - 1.0f); // [0,1]->[-1,1]
+	normal = normalize(normal * 2.0f - 1.0f);
 	vec3 lightDirection = normalize(lightPosition - tangentPos);
 	float diff = max(dot(lightDirection, normal), 0.0f);
 	float intens=0.0f;

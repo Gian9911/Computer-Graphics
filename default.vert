@@ -15,7 +15,6 @@ uniform vec3 camPos;
 uniform int lightType;
 
 out vec2 texCoord;
-// out vec3 Normal;
 out vec3 tangentPos;
 out vec3 Pos;
 out vec3 lightPosition;
