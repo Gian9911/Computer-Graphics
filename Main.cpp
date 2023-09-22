@@ -96,8 +96,8 @@ void compute_TangentBitangent() {
 }
 /* 
   You can choose 2 textures: 
-    diffuse.png -> diffuse image of a wall
-    h_map_noise.jpg -> height map generated using GIMP
+    1) diffuse.png -> diffuse image of a wall
+    2) h_map_noise.jpg -> height map generated using GIMP
   Then you can compare the normal_map.png obtained with the original (normal.png for diffuse, h_map_noise_normal for the other)
   checking the difference from generating a normal map with a diffuse and with height map. 
 */
