@@ -16,6 +16,9 @@ std::vector<Gray> ImageProcessing::rgbToGray(unsigned char *diffuse_data, int wi
       gray_img[index].gray = 0.299f * diffuse_map[index].r + 0.587f * diffuse_map[index].g + 0.114f * diffuse_map[index].b;
     }
   }
+  if (!stbi_write_png("textures/gray_image.png", width, height, 1, gray_img.data(), width)) {
+    std::cout << "Failed to write grayscale image." << std::endl;
+  }
   return gray_img;
 }
 // Function to compute the normal map
@@ -81,12 +84,13 @@ std::vector<Gray> ImageProcessing::apply_padding_to_image(std::vector<Gray> img,
   }
   return padded_img_matrix;
 }
-/* Create normal map in textures/normal_map*/
+/* Create "normal_map.png" in textures folder*/
 int ImageProcessing::compute_normal_map(std::string diffusePath, double strength, type_padding padding) {
   int width, height, channels;
   unsigned char *diffuse_data = stbi_load(diffusePath.c_str(), &width, &height, &channels, 3);
   std::vector<Color> normal_map(width * height);
   std::vector<Gray> map = apply_padding_to_image(rgbToGray(diffuse_data, width, height), 3, padding, height, width);
+  std::vector<Gray> sobel_img(width * height);
   // map(width+2,height+2)  normal_map(width,height)
   for (int y = 1; y < height + 1; y++) {
     for (int x = 1; x < width + 1; x++) {
@@ -98,9 +102,9 @@ int ImageProcessing::compute_normal_map(std::string diffusePath, double strength
                (map[(y - 1) * (width + 2) + (x - 1)].gray + 2 * map[(y - 1) * (width + 2) + x].gray + map[(y - 1) * (width + 2) + (x + 1)].gray);
 
       // Calculate the normal vector
-      double length = std::sqrt(gx * gx + gy * gy + 255 * 255); // 255 is the depth range (maximum intensity value) [gx,gy,255]
+      double length = std::sqrt(gx * gx + gy * gy + 255 * 255);
       double nx = -gx * strength / length;
-      double ny = -gy * strength / length; 
+      double ny = -gy * strength / length;
       double nz = 1.0;
 
       // Normalize the normal vector
@@ -113,8 +117,11 @@ int ImageProcessing::compute_normal_map(std::string diffusePath, double strength
       normal_map[(y - 1) * width + (x - 1)].r = static_cast<unsigned char>((nx + 1.0) * 0.5 * 255);
       normal_map[(y - 1) * width + (x - 1)].g = static_cast<unsigned char>((ny + 1.0) * 0.5 * 255);
       normal_map[(y - 1) * width + (x - 1)].b = static_cast<unsigned char>((nz + 1.0) * 0.5 * 255);
+      sobel_img[(y - 1) * width + (x - 1)].gray = sqrt(gx * gx + gy * gy) > 255 ? 255 : sqrt(gx * gx + gy * gy);
     }
   }
+  if (!stbi_write_png("textures/sobel_img.png", width, height, 1, sobel_img.data(), width))
+    std::cout << "Failed to write sobel image." << std::endl;
   if (!stbi_write_png("textures/normal_map.png", width, height, 3, normal_map.data(), width * 3)) {
     std::cout << "Failed to write the image." << std::endl;
     return 1;
